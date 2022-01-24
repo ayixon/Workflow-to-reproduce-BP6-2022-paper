@@ -66,8 +66,4 @@ Duplication rate: 4.80288%
 
 Insert size peak (evaluated by paired-end reads): 279
 
-JSON report: fastp.json
-HTML report: fastp.html
-
-fastp -i varnish_shotgun_bp6_S3HiC_AD002_R1.fastq -I varnish_shotgun_bp6_S3HiC_AD002_R2.fastq -w 20 -o clean_varnish_shotgun_bp6_S3HiC_AD002_R1.fq -O clean_varnish_shotgun_bp6_S3HiC_AD002_R2.fq
 fastp v0.20.1, time used: 1981 seconds
