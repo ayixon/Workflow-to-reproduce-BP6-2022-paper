@@ -31,10 +31,10 @@ Alignment file(s): bp6_newbins_s3_m1.bam; bp6_newbins_rerun_s3_m1.bam
 
 
 Read1 before filtering:
-total reads: 72136133
-total bases: 11181100615
-Q20 bases: 10669942166(95.4284%)
-Q30 bases: 10240561480(91.5881%)
+total reads: 72136133.
+total bases: 11181100615.
+Q20 bases: 10669942166(95.4284%).
+Q30 bases: 10240561480(91.5881%).
 
 Read2 before filtering:
 total reads: 72136133
