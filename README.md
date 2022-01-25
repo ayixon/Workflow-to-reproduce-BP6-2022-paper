@@ -91,3 +91,72 @@ kaiju2krona -t /mnt/f/kaiju/nodes.dmp  -n /mnt/f/kaiju/names.dmp  -i kaiju_out_b
 
 The file kaiju.out.krona can then be imported into Krona and converted into an HTML file using Krona's ktImportText program:
 ktImportText -o kaiju.out_bp6.html /mnt/f/Lecturas_Metagenomas/Hi_C_Reads_BP6_BP8/bp6_shotgun_reads_buenas/kaiju.out_bp6.krona
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+# GTDB-Tk v1.7.0 analysis
+
+    $ gtdbtk identify --genome_dir gtdb_input/  --out_dir identify/ --extension fasta --cpus 4
+    
+    [2022-01-23 10:52:52] INFO: GTDB-Tk v1.7.0
+[2022-01-23 10:52:52] INFO: gtdbtk identify --genome_dir gtdb_input/ --out_dir identify/ --extension fasta --cpus 4
+[2022-01-23 10:52:52] INFO: Using GTDB-Tk reference data version r202: /home/ayixon/miniconda3/envs/gtdb/share/gtdbtk-1.7.0/db/
+[2022-01-23 10:52:52] INFO: Identifying markers in 35 genomes with 4 threads.
+[2022-01-23 10:52:52] TASK: Running Prodigal V2.6.3 to identify genes.
+[2022-01-23 11:01:13] INFO: Completed 35 genomes in 8.35 minutes (4.19 genomes/minute).
+[2022-01-23 11:01:13] TASK: Identifying TIGRFAM protein families.
+[2022-01-23 11:04:22] INFO: Completed 35 genomes in 3.15 minutes (11.10 genomes/minute).
+[2022-01-23 11:04:22] TASK: Identifying Pfam protein families.
+[2022-01-23 11:04:56] INFO: Completed 35 genomes in 33.38 seconds (1.05 genomes/second).
+[2022-01-23 11:04:56] INFO: Annotations done using HMMER 3.1b2 (February 2015).
+[2022-01-23 11:04:56] TASK: Summarising identified marker genes.
+[2022-01-23 11:05:01] INFO: Completed 35 genomes in 5.04 seconds (6.94 genomes/second).
+[2022-01-23 11:05:01] INFO: Done.
+
+    $ gtdbtk align --identify_dir identify/ --out_dir align --cpus 4
+    
+    [2022-01-23 11:23:18] INFO: GTDB-Tk v1.7.0
+[2022-01-23 11:23:18] INFO: gtdbtk align --identify_dir identify/ --out_dir align --cpus 4
+[2022-01-23 11:23:18] INFO: Using GTDB-Tk reference data version r202: /home/ayixon/miniconda3/envs/gtdb/share/gtdbtk-1.7.0/db/
+[2022-01-23 11:23:19] INFO: Aligning markers in 35 genomes with 4 CPUs.
+[2022-01-23 11:23:19] INFO: Processing 35 genomes identified as bacterial.
+[2022-01-23 11:23:23] INFO: Read concatenated alignment for 45,555 GTDB genomes.
+[2022-01-23 11:23:23] TASK: Generating concatenated alignment for each marker.
+[2022-01-23 11:23:24] INFO: Completed 35 genomes in 1.35 seconds (25.92 genomes/second).
+[2022-01-23 11:23:24] TASK: Aligning 120 identified markers using hmmalign 3.1b2 (February 2015).
+[2022-01-23 11:23:35] INFO: Completed 120 markers in 10.28 seconds (11.67 markers/second).
+[2022-01-23 11:23:35] TASK: Masking columns of bacterial multiple sequence alignment using canonical mask.
+[2022-01-23 11:24:28] INFO: Completed 45,590 sequences in 53.56 seconds (851.27 sequences/second).
+[2022-01-23 11:24:28] INFO: Masked bacterial alignment from 41,084 to 5,037 AAs.
+[2022-01-23 11:24:28] INFO: 1 bacterial user genomes have amino acids in <10.0% of columns in filtered MSA.
+[2022-01-23 11:24:29] INFO: Creating concatenated alignment for 45,589 bacterial GTDB and user genomes.
+[2022-01-23 11:24:53] INFO: Creating concatenated alignment for 34 bacterial user genomes.
+[2022-01-23 11:24:53] INFO: Done.
+
+    $ gtdbtk classify --genome_dir gtdb_input/ -x fasta --align_dir align/  --out_dir classify_output --cpus 4
+
+[2022-01-23 11:37:39] INFO: GTDB-Tk v1.7.0
+[2022-01-23 11:37:39] INFO: gtdbtk classify --genome_dir gtdb_input/ -x fasta --align_dir align/ --out_dir classify_output --cpus 4
+[2022-01-23 11:37:39] INFO: Using GTDB-Tk reference data version r202: /home/ayixon/miniconda3/envs/gtdb/share/gtdbtk-1.7.0/db/
+[2022-01-23 11:37:40] WARNING: pplacer requires ~215 GB of RAM to fully load the bacterial tree into memory. However, 18.31 GB was detected. This may affect pplacer performance, or fail if there is insufficient swap space.
+[2022-01-23 11:37:40] TASK: Placing 34 bacterial genomes into reference tree with pplacer using 4 CPUs (be patient).
+[2022-01-23 11:37:40] INFO: pplacer version: v1.1.alpha19-0-g807f6f3
+==> Running pplacer v1.1.alpha19-0-g807f6f3 analysis on align/align/gtdbtk.bac120.user_ms==> 
+Step 2 of 9: Pre-masking sequences.
+
+==> Step 6 of 9: Pulling exponents.                                                          Process Process-1:
+Traceback (most recent call last):
+  File "/home/ayixon/anaconda3/envs/gtdb/lib/python3.8/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/home/ayixon/anaconda3/envs/gtdb/lib/python3.8/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ayixon/anaconda3/envs/gtdb/lib/python3.8/site-packages/gtdbtk/external/pplacer.py", line 124, in _worker
+    raise PplacerException('An error was encountered while '
+gtdbtk.exceptions.PplacerException: An error was encountered while running pplacer, check the log file: classify_output/classify/intermediate_results/pplacer/pplacer.bac120.out
+[2022-01-23 22:23:49] ERROR: Controlled exit resulting from an unrecoverable error or warning.
+
+================================================================================
+EXCEPTION: PplacerException
+  MESSAGE: An error was encountered while running pplacer.
+________________________________________________________________________________
+
