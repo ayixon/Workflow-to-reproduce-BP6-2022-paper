@@ -67,3 +67,27 @@ Duplication rate: 4.80288%
 Insert size peak (evaluated by paired-end reads): 279
 
 fastp v0.20.1, time used: 1981 seconds
+
+-----------------------------------------------------------------------------------------------------------------------
+# Taxonomic Profile
+
+    $ kaiju -t /mnt/f/kaiju/nodes.dmp  -f /mnt/f/kaiju/kaiju_db_progenomes.fmi   -i clean_varnish_shotgun_bp6_S3HiC_AD002_R1.fq  -j clean_varnish_shotgun_bp6_S3HiC_AD002_R2.fq -v -z 20 -o kaiju_out_bp6
+
+15:58:08 Reading database
+
+ Reading taxonomic tree from file /mnt/f/kaiju/nodes.dmp
+ 
+ Reading index from file /mnt/f/kaiju/kaiju_db_progenomes.fmi
+ 
+Output file: kaiju_out_bp6
+
+15:59:00 Start classification using 20 threads.
+
+16:46:37 Finished.
+
+Creating input file for Krona
+
+kaiju2krona -t /mnt/f/kaiju/nodes.dmp  -n /mnt/f/kaiju/names.dmp  -i kaiju_out_bp6  -o kaiju.out_bp6.krona
+
+The file kaiju.out.krona can then be imported into Krona and converted into an HTML file using Krona's ktImportText program:
+ktImportText -o kaiju.out_bp6.html /mnt/f/Lecturas_Metagenomas/Hi_C_Reads_BP6_BP8/bp6_shotgun_reads_buenas/kaiju.out_bp6.krona
