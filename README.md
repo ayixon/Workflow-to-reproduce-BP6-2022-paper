@@ -160,3 +160,26 @@ EXCEPTION: PplacerException
   MESSAGE: An error was encountered while running pplacer.
 ________________________________________________________________________________
 
+# Anvio_Taxonomy
+
+Database for contigs_bins
+
+#!/bin/bash 
+for i in  bin_16.fasta  bin_23.fasta  bin_30.fasta  bin_6.fasta bin_1.fasta             bin_17.fasta  bin_24.fasta  bin_31.fasta  bin_7.fasta bin_10.fasta            bin_18.fasta  bin_25.fasta  bin_32.fasta  bin_8.fasta bin_11.fasta            bin_19.fasta  bin_26.fasta  bin_33.fasta  bin_9.fasta bin_12.fasta            bin_2.fasta   bin_27.fasta  bin_34.fasta bin_13.fasta            bin_20.fasta  bin_28.fasta  bin_35.fasta bin_14.fasta            bin_21.fasta  bin_29.fasta  bin_4.fasta bin_15.fasta            bin_22.fasta  bin_3.fasta   bin_5.fasta 
+do anvi-gen-contigs-database -f "$i" -o "$i".db -T 20
+done 
+echo "Contig database"
+
+--------------------------
+# Anvio workFlow per bin:
+
+
+	$ anvi-setup-scg-taxonomy --reset
+
+	$ anvi-run-hmms -c contig.db --num-threads 20 --just-do-it
+
+	$ anvi-run-scg-taxonomy -c contig.db
+    
+    $ anvi-estimate-scg-taxonomy -c contig.db
+
+
