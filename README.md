@@ -87,10 +87,14 @@ Output file: kaiju_out_bp6
 
 Creating input file for Krona
 
-kaiju2krona -t /mnt/f/kaiju/nodes.dmp  -n /mnt/f/kaiju/names.dmp  -i kaiju_out_bp6  -o kaiju.out_bp6.krona
+	kaiju2krona -t /mnt/f/kaiju/nodes.dmp  -n /mnt/f/kaiju/names.dmp  -i kaiju_out_bp6  -o kaiju.out_bp6.krona
 
 The file kaiju.out.krona can then be imported into Krona and converted into an HTML file using Krona's ktImportText program:
 ktImportText -o kaiju.out_bp6.html /mnt/f/Lecturas_Metagenomas/Hi_C_Reads_BP6_BP8/bp6_shotgun_reads_buenas/kaiju.out_bp6.krona
+
+Creating classification summary
+
+	kaiju2table -t /mnt/f/kaiju_db/nodes.dmp -n /mnt/f/kaiju_db/names.dmp -r genus -o kaiju_genusTotal_summary.tsv kaiju_out_bp6
 
 --------------------------------------------------------------------------------------------------------------------------------
 
