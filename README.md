@@ -187,7 +187,7 @@ echo "Contig database"
     
  ================================================================================
  
- # UBCG: Phylogenomic tree reconstruction with  Up-to-date bacterial core gene set and pipeline (UBCG)
+ # UBCG: Phylogenomic tree reconstruction with  Up-to-date bacterial core gene set pipeline (UBCG)
  
  BCG prediction
  
