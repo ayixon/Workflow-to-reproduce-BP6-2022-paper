@@ -165,12 +165,15 @@ ________________________________________________________________________________
 Database for contigs_bins
 
 #!/bin/bash 
-for i in  bin_16.fasta  bin_23.fasta  bin_30.fasta  bin_6.fasta bin_1.fasta             bin_17.fasta  bin_24.fasta  bin_31.fasta  bin_7.fasta bin_10.fasta            bin_18.fasta  bin_25.fasta  bin_32.fasta  bin_8.fasta bin_11.fasta            bin_19.fasta  bin_26.fasta  bin_33.fasta  bin_9.fasta bin_12.fasta            bin_2.fasta   bin_27.fasta  bin_34.fasta bin_13.fasta            bin_20.fasta  bin_28.fasta  bin_35.fasta bin_14.fasta            bin_21.fasta  bin_29.fasta  bin_4.fasta bin_15.fasta            bin_22.fasta  bin_3.fasta   bin_5.fasta 
+for i in  bin_16.fasta  bin_23.fasta  bin_30.fasta  bin_6.fasta bin_1.fasta             bin_17.fasta  bin_24.fasta  bin_31.fasta  bin_7.fasta bin_10.fasta            bin_18.fasta  bin_25.fasta  bin_32.fasta  bin_8.fasta bin_11.fasta            bin_19.fasta  bin_26.fasta  bin_33.fasta  bin_9.fasta bin_12.fasta            bin_2.fasta   bin_27.fasta  bin_34.fasta bin_13.fasta            bin_20.fasta  bin_28.fasta  bin_35.fasta bin_14.fasta            bin_21.fasta  bin_29.fasta  bin_4.fasta bin_15.fasta            bin_22.fasta  bin_3.fasta   bin_5.fasta
+
 do anvi-gen-contigs-database -f "$i" -o "$i".db -T 20
-done 
+
+done
+
 echo "Contig database"
 
---------------------------
+================================================================================
 # Anvio workFlow per bin:
 
 
@@ -181,5 +184,35 @@ echo "Contig database"
 	$ anvi-run-scg-taxonomy -c contig.db
     
     $ anvi-estimate-scg-taxonomy -c contig.db
+    
+ ================================================================================
+ 
+ # UBCG: Phylogenomic tree reconstruction with  Up-to-date bacterial core gene set and pipeline (UBCG)
+ 
+ BCG prediction
+ 
+	 #!/bin/bash 
+
+	for i in  bin_1.fasta... bin_n.fasta   
+
+	do java -jar UBCG.jar extract -bcg_dir bcg -i fasta/$i -label $i -t 23 
+
+	done 
+
+	echo "BCG prediction Done"
+
+Running UBCGpipeline
+
+	$ java -jar UBCG.jar align -bcg_dir bcg -prefix 2022_Phylogenomic_bp6
+	
+          ##############################
+          #         UBCG_align         #
+          ##############################
+	Reading bcg files..
+ 	All of the gene trees were reconstructed.
+
+	Calculating Gene Support Indices (GSIs) from the gene trees..
+
+	The final tree marked with GSI was written to 'output/2022_Phylogenomica_bp6/2022_Phylogenomica_bp6.UBCG_gsi(92).codon.50.label.nwk'
 
 
