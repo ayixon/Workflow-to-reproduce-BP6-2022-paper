@@ -218,5 +218,20 @@ Running UBCGpipeline
 	Calculating Gene Support Indices (GSIs) from the gene trees..
 
 	The final tree marked with GSI was written to 'output/2022_Phylogenomica_bp6/2022_Phylogenomica_bp6.UBCG_gsi(92).codon.50.label.nwk'
+------------------------------------------------------------------------------------------------------------------------------------------------
 
+	enrichm annotate --protein_directory input_enrichM_metagenome/ --threads 3 --ko --pfam  --output input_enrichM_metagenome/enrichM_annotate
+	/usr/local/lib/python3.8/dist-packages/fuzzywuzzy/fuzz.py:11: UserWarning: Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning
+ 	 warnings.warn('Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning')
+	[2022-02-01 13:03:23 PM] INFO: Command: /usr/local/bin/enrichm annotate --protein_directory input_enrichM_metagenome/ --threads 3 --ko --pfam --output 			input_enrichM_metagenome/enrichM_annotate
+	[2022-02-01 13:03:23 PM] INFO: Running the annotate pipeline
+	[2022-02-01 13:03:24 PM] INFO: Running pipeline: annotate
+	[2022-02-01 13:03:24 PM] INFO: Setting up for genome annotation
+	[2022-02-01 13:03:24 PM] INFO: Using provided proteins
+	[2022-02-01 13:03:24 PM] INFO: Preparing genomes for annotation
+	[2022-02-01 13:03:28 PM] INFO: Starting annotation:
+	[2022-02-01 13:03:28 PM] INFO:     - Annotating genome(s) with ko ids using DIAMOND
+	[2022-02-01 13:03:28 PM] INFO:     - BLASTing genome(s)
+	[2022-02-01 13:50:04 PM] INFO:     - Generating ko frequency table
+	[2022-02-01 13:50:04 PM] INFO:     - Writing results to file: input_enrichM_metagenome/enrichM_annotate/ko_frequency_table.tsv
 
