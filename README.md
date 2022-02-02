@@ -219,7 +219,7 @@ Running UBCGpipeline
 
 	The final tree marked with GSI was written to 'output/2022_Phylogenomica_bp6/2022_Phylogenomica_bp6.UBCG_gsi(92).codon.50.label.nwk'
 ------------------------------------------------------------------------------------------------------------------------------------------------
-
+# enrichm  Annotation
 	enrichm annotate --protein_directory input_enrichM_metagenome/ --threads 3 --ko --pfam  --output input_enrichM_metagenome/enrichM_annotate
 	/usr/local/lib/python3.8/dist-packages/fuzzywuzzy/fuzz.py:11: UserWarning: Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning
  	 warnings.warn('Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning')
