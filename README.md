@@ -149,19 +149,10 @@ Creating classification summary
 Step 2 of 9: Pre-masking sequences.
 
 ==> Step 6 of 9: Pulling exponents.                                                          Process Process-1:
-Traceback (most recent call last):
-  File "/home/ayixon/anaconda3/envs/gtdb/lib/python3.8/multiprocessing/process.py", line 315, in _bootstrap
-    self.run()
-  File "/home/ayixon/anaconda3/envs/gtdb/lib/python3.8/multiprocessing/process.py", line 108, in run
-    self._target(*self._args, **self._kwargs)
-  File "/home/ayixon/anaconda3/envs/gtdb/lib/python3.8/site-packages/gtdbtk/external/pplacer.py", line 124, in _worker
-    raise PplacerException('An error was encountered while '
-gtdbtk.exceptions.PplacerException: An error was encountered while running pplacer, check the log file: classify_output/classify/intermediate_results/pplacer/pplacer.bac120.out
-[2022-01-23 22:23:49] ERROR: Controlled exit resulting from an unrecoverable error or warning.
+.....
+classify_output/classify/intermediate_results/pplacer/pplacer.bac120.out
 
 ================================================================================
-EXCEPTION: PplacerException
-  MESSAGE: An error was encountered while running pplacer.
 ________________________________________________________________________________
 
 # Anvio_Taxonomy
@@ -234,4 +225,77 @@ Running UBCGpipeline
 	[2022-02-01 13:03:28 PM] INFO:     - BLASTing genome(s)
 	[2022-02-01 13:50:04 PM] INFO:     - Generating ko frequency table
 	[2022-02-01 13:50:04 PM] INFO:     - Writing results to file: input_enrichM_metagenome/enrichM_annotate/ko_frequency_table.tsv
+	
+	------------------------------------------------------------------------------------------------------------------------------------------------
+# MGWAS with pyseer
+
+		1-Prediction of  kmers with unitig caller:
+--------------------------------------------------
+		$ unitig-counter -strains  input.txt -output output -nb-cores 20
+
+Stats:
+Number of kmers: 823092427
+Number of unitigs: 7850499
+################################################################################
+[Starting mapping process... ]
+Using 20 cores to map 18 read files.
+966800 reads processed.
+[Mapping process finished!]
+[Transpose pattern matrix..]
+[Generating pyseer input]...
+Number of unique patterns: 25613
+[Generating pyseer input] - Done!
+Done!
+################################################################################
+
+#############################################################################################################
+
+		2-Running pysser on:
+--------------------------------------------------
+
+pyseer --lmm --phenotypes polyurethanolytic.phenotype.txt --kmers BP6_unitigs.txt.gz  --similarity phylogeny_K.tsv  --output-patterns kmer_patterns.txt \
+--cpu 24 > poliurethane_kmers.txt
+Read 18 phenotypes
+Detected binary phenotype
+Setting up LMM
+Similarity matrix has dimension (18, 18)
+Analysing 18 samples found in both phenotype and similarity matrix
+h^2 = 1.00
+7850499 loaded variants
+13800 pre-filtered variants
+7836699 tested variants
+7836699 printed variants
+
+###########################################################################################################################
+
+	 3-Estimate "significance threshold"  using the number of unique k-mer patterns
+--------------------------------------------------
+
+		$ python count_pattern.py kmer_patterns.txt
+	Patterns:       24297
+	Threshold:      2.06E-06
+
+#############################################################################################################################
+		
+	4-Interpreting significant k-mers
+--------------------------------------------------
+
+cat <(head -1 poliurethane_kmers.txt) <(awk '$4<2.06E-06 {print $0}' poliurethane_kmers.txt) > significant_kmers.txt
+
+	
+	145127 significant kmers
+...many of them are false positives due to their short length...
+
+	...manually curing short sequences (< 50pb)
+
+#############################################################################################################################
+#############################################################################################################################
+
+	Read 145127 k-mers
+
+Causal efective after curing 27450 k-mers
+
+#############################################################################################################################
+#############################################################################################################################
+
 
